@@ -6,33 +6,43 @@ namespace Aug29Exercises
     {
         static void Main(string[] args)
         {
-            int[] arr = new int[10];
-            for(int i = 0; i < 10; i++)
-            {
-                arr[i]=Convert.ToInt32(Console.ReadLine());
-            }
-            Array.Sort(arr);
-            Console.WriteLine("Enter element to search");
-            int k=Convert.ToInt32(Console.ReadLine());
-            binarySearch(arr, 0, arr.Length - 1, k);
-        }
-        public static void binarySearch(int[] a,int i,int j,int k)
-        {
-            int mid;
-            while (i <= j)
-            {
-                mid=(i+j)/2;
-                if (a[mid] == k)
-                {
-                    Console.WriteLine(mid);
-                    break;
-                }
-                else if (a[mid] > k)
-                    j = mid - 1;
-                else
-                    i = mid + 1;
+            Userstack<int> u = new Userstack<int>();
+            u.AddorEdit(0, 22);
+            u.AddorEdit(1, 24);
+            int k=u.Returndata(1);
+            Console.WriteLine(k);
+            u.showdata(1);
+            Console.ReadLine();
+    
 
+        }
+
+    }
+    class Userstack<T>
+    {
+        T[] data = new T[10];
+        public void AddorEdit(int index,T str)
+        {
+            if(index>=0 && index <= 10)
+            {
+                data[index]=str;
             }
+        }
+        public T Returndata(int index)
+        {
+            if(index>=0 && index<=10)
+            {
+                return data[index];
+            }
+            else
+            {
+                return default(T);
+            }
+        }
+        public void showdata(int index)
+        {
+            Console.WriteLine(data[index]);
+
         }
     }
 }
