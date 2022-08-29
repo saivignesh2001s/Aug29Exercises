@@ -6,43 +6,69 @@ namespace Aug29Exercises
     {
         static void Main(string[] args)
         {
-            Userstack<int> u = new Userstack<int>();
-            u.AddorEdit(0, 22);
-            u.AddorEdit(1, 24);
-            int k=u.Returndata(1);
+            Userstack<string> u = new Userstack<string>();
+            u.Push("America");
+            u.Push("Russia");
+            u.Push("India");
+            Console.WriteLine("Popped element");
+            u.Pop();
+            Console.WriteLine("Elements at present");
+            u.printData();
+            Console.WriteLine("Top element at present");
+            string k = u.Peek();
             Console.WriteLine(k);
-            u.showdata(1);
             Console.ReadLine();
-    
+           
 
         }
 
     }
     class Userstack<T>
     {
-        T[] data = new T[10];
-        public void AddorEdit(int index,T str)
+        internal static int max = 1000;
+        T[] stack=new T[max];
+        int top=-1;
+        public void Push(T str)
         {
-            if(index>=0 && index <= 10)
+            if (top >= 1000)
             {
-                data[index]=str;
-            }
-        }
-        public T Returndata(int index)
-        {
-            if(index>=0 && index<=10)
-            {
-                return data[index];
+                Console.WriteLine("can't push");
             }
             else
             {
-                return default(T);
+                stack[++top] = str;
             }
         }
-        public void showdata(int index)
+        public void Pop()
         {
-            Console.WriteLine(data[index]);
-
+            if (top < 0)
+            {
+                Console.WriteLine("No elements there to pop");
+            }
+            else
+            {
+                T value=stack[top--];
+                Console.WriteLine(value);
+            }
+        }
+        public T Peek()
+        {
+            if (top < 0)
+            {
+                return default(T);
+            }
+            else
+            {
+                T value = stack[top];
+                return value;
+            }
+        }
+        public void printData()
+        {
+            for(int i = top; i >= 0; i--)
+            {
+                Console.WriteLine(stack[i]);
+            }
         }
     }
 }
